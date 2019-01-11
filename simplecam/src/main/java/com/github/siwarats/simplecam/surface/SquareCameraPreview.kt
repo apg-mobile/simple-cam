@@ -1,8 +1,7 @@
-package com.github.siwarats.simplecam.preview
+package com.github.siwarats.simplecam.surface
 
 import android.content.Context
 import android.hardware.Camera
-import com.github.siwarats.simplecam.surface.CameraPreview
 
 open class SquareCameraPreview(
         context: Context,

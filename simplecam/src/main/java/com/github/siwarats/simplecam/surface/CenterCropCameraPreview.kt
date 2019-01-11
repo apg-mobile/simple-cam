@@ -1,4 +1,4 @@
-package com.github.siwarats.simplecam.preview
+package com.github.siwarats.simplecam.surface
 
 import android.content.Context
 import android.hardware.Camera

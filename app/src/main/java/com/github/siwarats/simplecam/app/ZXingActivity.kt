@@ -23,8 +23,8 @@ class ZXingActivity : CameraPermissionActivity(), Callback {
         super.onResume()
 
         simpleCam = SimpleCam.Builder()
-            .setPreviewMode(PreviewMode.SQUARE)
-            .setCallback(ZXingPreviewCallback(false, this))
+            .setPreviewMode(PreviewMode.CENTER_CROP)
+            .setCallback(ZXingPreviewCallback(this))
             .build()
 
         simpleCam?.startInto(flPreview)

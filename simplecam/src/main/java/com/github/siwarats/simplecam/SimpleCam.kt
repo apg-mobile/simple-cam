@@ -6,9 +6,9 @@ import android.view.SurfaceView
 import android.widget.FrameLayout
 import com.github.siwarats.simplecam.const.PreviewMode
 import com.github.siwarats.simplecam.extension.getCameraInstance
-import com.github.siwarats.simplecam.preview.CenterCropCameraPreview
-import com.github.siwarats.simplecam.preview.CenterInsideCameraPreview
-import com.github.siwarats.simplecam.preview.SquareCameraPreview
+import com.github.siwarats.simplecam.surface.CenterCropCameraPreview
+import com.github.siwarats.simplecam.surface.CenterInsideCameraPreview
+import com.github.siwarats.simplecam.surface.SquareCameraPreview
 
 class SimpleCam private constructor(){
 

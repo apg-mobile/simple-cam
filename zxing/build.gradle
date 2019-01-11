@@ -2,7 +2,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-group='com.github.siwarats.simple-cam'
+group='com.github.siwarats'
 
 android {
     compileSdkVersion 28
