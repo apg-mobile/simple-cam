@@ -16,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         Pair("Square", "Preview in the square mode with correct orientation."),
         Pair("Center Inside", "Preview center inside in a container with correct orientation."),
         Pair("Center Crop", "Preview center crop in a container with correct orientation."),
-        Pair("ZXing", "Implement ZXing Scanner")
+        Pair("ZXing", "Implement ZXing Scanner"),
+        Pair("Barcode Capture", "Take a photo and detect Barcode together.")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                 2 -> SimplePreviewActivity.createIntent(this, PreviewMode.CENTER_CROP)
                     .also { startActivity(it) }
                 3 -> ZXingActivity.createIntent(this)
+                    .also { startActivity(it) }
+                4 -> BarcodeCaptureActivity.createIntent(this)
                     .also { startActivity(it) }
             }
         }

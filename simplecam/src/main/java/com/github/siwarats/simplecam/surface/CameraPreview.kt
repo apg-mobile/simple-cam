@@ -8,16 +8,17 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import com.github.siwarats.simplecam.extension.getBestAutoFocus
-import com.github.siwarats.simplecam.extension.getCorrectCameraRotation
-import com.github.siwarats.simplecam.extension.getDeviceRotation
+import com.github.siwarats.simplecam.core.getBestAutoFocus
+import com.github.siwarats.simplecam.core.getCorrectCameraRotation
+import com.github.siwarats.simplecam.core.getDeviceRotation
 import java.io.IOException
 
 @SuppressLint("ViewConstructor")
 open class CameraPreview(
     context: Context,
     protected val camera: Camera,
-    private val callback: Camera.PreviewCallback?
+    private val callback: Camera.PreviewCallback?,
+    private val autoFocusCallback: Camera.AutoFocusCallback? = null
 ) : SurfaceView(context), SurfaceHolder.Callback {
 
     init {
@@ -70,7 +71,7 @@ open class CameraPreview(
 //                params.meteringAreas = areas
                 camera.parameters = params
 
-                camera.autoFocus { _, _ -> }
+                camera.autoFocus(autoFocusCallback)
             }
             return true
         }

@@ -1,4 +1,4 @@
-package com.github.siwarats.simplecam.extension
+package com.github.siwarats.simplecam.core
 
 import android.content.Context
 import android.hardware.Camera

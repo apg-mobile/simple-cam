@@ -3,7 +3,7 @@ package com.github.siwarats.simplecam.zxing
 import android.hardware.Camera
 import com.github.siwarats.simplecam.PreviewCallback
 
-class ZXingPreviewCallback(
+open class ZXingPreviewCallback(
     private val callback: Callback
 ) : PreviewCallback {
 
