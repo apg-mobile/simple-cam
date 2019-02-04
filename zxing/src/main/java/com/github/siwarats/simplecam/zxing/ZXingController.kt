@@ -33,11 +33,21 @@ class ZXingController(formats: MutableList<BarcodeFormat> = DEFAULT_HINTS) {
             }
     }
 
-    fun decode(data: ByteArray, width: Int, height: Int): Result? {
-        return if (isDecodeAllOrientation) {
+    fun decode(data: ByteArray, width: Int, height: Int): ResultObject? {
+        val result = if (isDecodeAllOrientation) {
             decodeAllOrientation(data, width, height)
         } else {
             decodeNormal(data, width, height)
+        }
+        return if (result != null) {
+            ResultObject(
+                byteArray = data,
+                result = result,
+                height = height,
+                width = width
+            )
+        } else {
+            null
         }
     }
 

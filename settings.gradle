@@ -1,1 +1,1 @@
-include ':app', ':simplecam', ':zxing'
+include ':app', ':simplecam', ':zxing', ':core'
