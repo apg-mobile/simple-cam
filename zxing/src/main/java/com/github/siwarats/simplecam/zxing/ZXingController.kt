@@ -20,7 +20,7 @@ class ZXingController(formats: MutableList<BarcodeFormat> = DEFAULT_HINTS) {
 
     private val decoder: MultiFormatReader
 
-    var isDecodeAllOrientation = false
+    var isDecodeAllOrientation = true
 
     init {
         val hints = EnumMap<DecodeHintType, Any>(DecodeHintType::class.java)
@@ -33,11 +33,21 @@ class ZXingController(formats: MutableList<BarcodeFormat> = DEFAULT_HINTS) {
             }
     }
 
-    fun decode(data: ByteArray, width: Int, height: Int): Result? {
-        return if (isDecodeAllOrientation) {
+    fun decode(data: ByteArray, width: Int, height: Int): ResultObject? {
+        val result = if (isDecodeAllOrientation) {
             decodeAllOrientation(data, width, height)
         } else {
             decodeNormal(data, width, height)
+        }
+        return if (result != null) {
+            ResultObject(
+                byteArray = data,
+                result = result,
+                height = height,
+                width = width
+            )
+        } else {
+            null
         }
     }
 
@@ -68,7 +78,7 @@ class ZXingController(formats: MutableList<BarcodeFormat> = DEFAULT_HINTS) {
     }
 
     /**
-     * This can decoding by ignore orientation but take more time than decodeNormal() (3-4 times).
+     * This can decoding by ignore orientation but take more time than decodeNormal() (Maybe 3-4 times).
      */
     private fun decodeAllOrientation(data: ByteArray, width: Int, height: Int): Result? {
         /*

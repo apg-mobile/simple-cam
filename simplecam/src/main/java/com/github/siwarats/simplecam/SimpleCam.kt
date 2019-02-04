@@ -2,15 +2,15 @@ package com.github.siwarats.simplecam
 
 import android.hardware.Camera
 import android.view.Gravity
-import android.view.SurfaceView
 import android.widget.FrameLayout
 import com.github.siwarats.simplecam.const.PreviewMode
-import com.github.siwarats.simplecam.extension.getCameraInstance
-import com.github.siwarats.simplecam.preview.CenterCropCameraPreview
-import com.github.siwarats.simplecam.preview.CenterInsideCameraPreview
-import com.github.siwarats.simplecam.preview.SquareCameraPreview
+import com.github.siwarats.simplecam.core.getCameraInstance
+import com.github.siwarats.simplecam.surface.CameraPreview
+import com.github.siwarats.simplecam.surface.CenterCropCameraPreview
+import com.github.siwarats.simplecam.surface.CenterInsideCameraPreview
+import com.github.siwarats.simplecam.surface.SquareCameraPreview
 
-class SimpleCam private constructor(){
+class SimpleCam private constructor() {
 
     var target: FrameLayout? = null
         private set
@@ -18,7 +18,7 @@ class SimpleCam private constructor(){
     var camera: Camera? = null
         private set
 
-    var surfaceView: SurfaceView? = null
+    var cameraPreview: CameraPreview? = null
         private set
 
     var previewMode: PreviewMode? = null
@@ -27,7 +27,7 @@ class SimpleCam private constructor(){
     var previewCallback: PreviewCallback? = null
         private set
 
-    fun startInto(target: FrameLayout?) {
+    fun startInto(target: FrameLayout?): CameraPreview {
         this.target = target
                 ?: throw NullPointerException("target must not be null.")
 
@@ -43,15 +43,18 @@ class SimpleCam private constructor(){
         }
 
         val context = target.context
-        surfaceView = when (previewMode) {
+        val camPreview = when (previewMode) {
             PreviewMode.CENTER_CROP -> CenterCropCameraPreview(context, cam, cameraCallback)
             PreviewMode.CENTER_INSIDE -> CenterInsideCameraPreview(context, cam, cameraCallback)
             else -> SquareCameraPreview(context, cam, cameraCallback)
         }
+        cameraPreview = camPreview
 
-        target.addView(surfaceView)
-        val previewParams = surfaceView?.layoutParams as? FrameLayout.LayoutParams
+        target.addView(cameraPreview)
+        val previewParams = cameraPreview?.layoutParams as? FrameLayout.LayoutParams
         previewParams?.gravity = Gravity.CENTER
+
+        return camPreview
     }
 
     fun release() {
@@ -59,10 +62,10 @@ class SimpleCam private constructor(){
         camera?.release()
         previewCallback?.onCameraRelease()
 
-        target?.removeView(surfaceView)
+        target?.removeView(cameraPreview)
 
         camera = null
-        surfaceView = null
+        cameraPreview = null
         target = null
         previewMode = null
         previewCallback = null

@@ -3,8 +3,7 @@ package com.github.siwarats.simplecam.zxing
 import android.hardware.Camera
 import com.github.siwarats.simplecam.PreviewCallback
 
-class ZXingPreviewCallback(
-    private val isDecodeAllOrientation: Boolean,
+open class ZXingPreviewCallback(
     private val callback: Callback
 ) : PreviewCallback {
 
@@ -13,9 +12,6 @@ class ZXingPreviewCallback(
     override fun onPreviewFrame(data: ByteArray, camera: Camera) {
         if (thread == null) {
             val controller = ZXingController()
-                .apply {
-                    isDecodeAllOrientation = this@ZXingPreviewCallback.isDecodeAllOrientation
-                }
             thread = ZXingThread(controller, callback)
                 .also {
                     it.start()

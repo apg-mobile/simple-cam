@@ -1,14 +1,13 @@
-package com.github.siwarats.simplecam.preview
+package com.github.siwarats.simplecam.surface
 
 import android.content.Context
 import android.hardware.Camera
-import com.github.siwarats.simplecam.extension.isDevicePortrait
-import com.github.siwarats.simplecam.surface.CameraPreview
+import com.github.siwarats.simplecam.core.isDevicePortrait
 
 open class CenterInsideCameraPreview(
-        context: Context,
-        camera: Camera,
-        callback: Camera.PreviewCallback?
+    context: Context,
+    camera: Camera,
+    callback: Camera.PreviewCallback?
 ) : CameraPreview(context, camera, callback) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
